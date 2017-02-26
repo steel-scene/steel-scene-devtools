@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "declaration": true,
+        "declarationDir": "public",
+        "forceConsistentCasingInFileNames": true,
+        "inlineSourceMap": false,
+        "moduleResolution": "node",
+        "newLine": "LF",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitUseStrict": true,
+        "noUnusedLocals": true,
+        "preserveConstEnums": false,
+        "removeComments": true,
+        "sourceMap": false,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es2015",
+        "lib": [
+            "dom",
+            "es2015"
+        ]
+    },
+    "exclude": [
+        "public",
+        "node_modules"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "locomation",
+  "version": "0.0.0",
+  "description": "",
+  "main": "public/index.html",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "build:debug": "rollup -w -c rollup.config.js",
+    "start": "concurrently \"npm run build:debug\" \"nw\""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "nw": "^0.20.3"
+  },
+  "window": {
+    "width": 400,
+    "height": 520,
+    "show": true,
+    "title": "Locomation DevTools",
+    "toolbar": true
+  },
+  "devDependencies": {
+    "concurrently": "^3.3.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-watch": "^3.2.2",
+    "typescript": "^2.2.1"
+  }
+}
