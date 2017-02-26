@@ -1,14 +1,24 @@
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
+import * as path from 'path';
+import * as url from 'url';
+
+const {app, BrowserWindow} = require('electron');
+
+// live reloading for development
+require('electron-reload')(path.join(__dirname, '../'), {
+  electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
+  hardResetMethod: 'exit'
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: typeof BrowserWindow;
 
-function createWindow () {
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', () => {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600})
+  win = new BrowserWindow({ width: 1280, height: 800 })
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -27,12 +37,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     win = null
   })
-}
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
