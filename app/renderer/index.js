@@ -1,8 +1,158 @@
 'use strict';
 
 var Vue = require('vue');
-var typestyle = require('typestyle');
 var csx = require('csx');
+var typestyle = require('typestyle');
+
+var flex;
+(function (flex) {
+    flex.containerFull = typestyle.style({
+        display: 'flex',
+        width: csx.percent(100),
+        justifyContent: 'space-around',
+        $nest: {
+            '> *': {
+                flexShrink: 0,
+                marginLeft: csx.px(10),
+                marginRight: csx.px(10),
+            }
+        }
+    });
+    flex.itemFill = typestyle.style({
+        flexGrow: 1,
+        flexBasis: 'auto'
+    });
+    flex.vertical = typestyle.style({
+        flexDirection: 'column'
+    });
+})(flex || (flex = {}));
+//# sourceMappingURL=flex.js.map
+
+var forms;
+(function (forms) {
+    forms.textField = typestyle.style({
+        width: csx.percent(100),
+        padding: csx.px(5)
+    });
+})(forms || (forms = {}));
+//# sourceMappingURL=forms.js.map
+
+const componentClass = typestyle.style({
+    $nest: {
+        button: {
+            padding: csx.px(7),
+            verticalAlign: 'middle',
+            cursor: 'pointer'
+        }
+    }
+});
+const AddressBarComponent = {
+    data() {
+        return {};
+    },
+    render(h) {
+        return (h("div", { class: typestyle.classes(flex.containerFull, componentClass) },
+            h("div", null,
+                h("button", null, "<"),
+                h("button", null, ">")),
+            h("div", { class: flex.itemFill },
+                h("input", { class: forms.textField, placeholder: "Enter Address" })),
+            h("div", null,
+                h("button", null, "GO"))));
+    }
+};
+//# sourceMappingURL=address-bar.js.map
+
+const componentClass$1 = typestyle.style({
+    $nest: {
+        iframe: {
+            width: csx.percent(100),
+            height: csx.px(400)
+        }
+    }
+});
+const ViewPortComponent = {
+    data() {
+        return {};
+    },
+    render(h) {
+        return (h("div", { class: componentClass$1 },
+            h("iframe", null)));
+    }
+};
+
+
+
+var components = Object.freeze({
+	AddressBarComponent: AddressBarComponent,
+	ViewPortComponent: ViewPortComponent
+});
+
+const arraySlice = Array.prototype.slice;
+const arrayCopy = (list, start, end) => {
+    return arraySlice.call(list, start, end);
+};
+//# sourceMappingURL=lists.js.map
+
+const minimize = (input) => {
+    if (!input || input.length < 1) {
+        return input;
+    }
+    return input[0].toLowerCase() + input.substr(1, input.length - 1);
+};
+const unsuffix = (input, suffix) => {
+    const lastIndexOfSuffix = input.lastIndexOf(suffix);
+    if (lastIndexOfSuffix === -1) {
+        return input;
+    }
+    return input.substr(0, lastIndexOfSuffix);
+};
+//# sourceMappingURL=strings.js.map
+
+const fixRenderFunction = (options) => {
+    if (options.render) {
+        const orender = options.render;
+        options.render = function (h) {
+            const self = this;
+            const f = function (tagName, attr) {
+                return h.apply(self, [tagName, attr, arrayCopy(arguments, 2)]);
+            };
+            return orender.call(self, f);
+        };
+    }
+};
+//# sourceMappingURL=rendering.js.map
+
+const registerComponents = (components) => {
+    const componentSuffix = 'Component';
+    const componentRegex = /^(.+)Component$/;
+    for (const key in components) {
+        if (!key.match(componentRegex)) {
+            continue;
+        }
+        const componentName = minimize(unsuffix(key, componentSuffix));
+        const options = components[key];
+        fixRenderFunction(options);
+        Vue.component(componentName, options);
+    }
+};
+//# sourceMappingURL=config.js.map
+
+const appClass = typestyle.style({
+    height: csx.viewHeight(100)
+});
+const App = {
+    el: '#app',
+    data: {},
+    render(h) {
+        return (h("div", { class: typestyle.classes(flex.containerFull, flex.vertical, appClass) },
+            h("address-bar", null),
+            h("div", { class: flex.itemFill },
+                h("view-port", null))));
+    }
+};
+fixRenderFunction(App);
+//# sourceMappingURL=app.js.map
 
 typestyle.fontFace({
     fontFamily: csx.quote('Hind'),
@@ -26,13 +176,10 @@ typestyle.fontFace({
 typestyle.cssRule('html, body', {
     width: csx.percent(100),
     height: csx.percent(100),
-    fontFamily: 'Hind',
-    color: 'red'
+    fontFamily: 'Hind'
 });
-new Vue({
-    el: '#app',
-    data: {},
-    render(h) {
-        return (h("h2", null, "Hello Vue + TypeStyle + Electron"));
-    }
-});
+//# sourceMappingURL=layout.js.map
+
+registerComponents(components);
+new Vue(App);
+//# sourceMappingURL=index.js.map

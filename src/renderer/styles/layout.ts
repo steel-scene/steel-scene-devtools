@@ -1,4 +1,3 @@
-import * as Vue from 'vue';
 import { cssRule, fontFace } from 'typestyle';
 import { percent, quote } from 'csx';
 
@@ -31,14 +30,6 @@ fontFace(
 cssRule('html, body', {
     width: percent(100),
     height: percent(100),
-    fontFamily: 'Hind',
-    color: 'red'
+    fontFamily: 'Hind'
 });
 
-new Vue({ 
-    el: '#app',
-    data: {},
-    render(h) {
-        return (<h2>Hello Vue + TypeStyle + Electron</h2>);
-    }
-});

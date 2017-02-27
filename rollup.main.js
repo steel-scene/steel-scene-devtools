@@ -2,6 +2,10 @@ var typescript = require('rollup-plugin-typescript');
 
 module.exports = {
     entry: './src/main/index.ts',
+    external: [
+        "path",
+        "url"
+    ],
     dest: './app/main/index.js',
     format: 'cjs',
     plugins: [
