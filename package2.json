@@ -1,0 +1,32 @@
+{
+  "name": "locomation-tools",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app/main/index.js",
+  "scripts": {
+    "build:main": "rollup -c rollup.main.js",
+    "build:renderer": "rollup -c rollup.renderer.js",
+    "debug:main": "rollup -w -c rollup.main.js",
+    "debug:renderer": "rollup -w -c rollup.renderer.js",
+    "launch": "./node_modules/.bin/electron .",
+    "start": "concurrently \"npm run debug:main\" \"npm run debug:renderer\" \"npm run launch\""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^7.0.5",
+    "csx": "^8.2.1",
+    "electron-prebuilt": "^1.4.13",
+    "typestyle": "^1.2.0",
+    "vue": "^2.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.3.0",
+    "electron-reload": "^1.1.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-watch": "^3.2.2",
+    "typescript": "^2.2.1"
+  }
+}
