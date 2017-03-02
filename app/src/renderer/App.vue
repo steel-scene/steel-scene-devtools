@@ -2,11 +2,12 @@
   <div id="#app">
     <address-bar 
       :src="targetUrl" 
-      v-on:navigate="updateUrl"></address-bar>
+      @navigate="updateUrl">
+    </address-bar>
     <view-port 
       :src="targetUrl" 
       :shouldrefresh="shouldRefresh" 
-      v-on:refresh-finished="onRefreshFinished">
+      @refresh-finished="onRefreshFinished">
     </view-port>
   </div>
 </template>
@@ -43,6 +44,19 @@
 </script>
 
 <style>
+  
+  /* css variables */
+  :root {
+    --primary-fg-color: steelblue;
+    --primary-bg-color: white;
+    --primary-border-color: black;
+  }
+  button {
+    --primary-fg-color: white;
+    --primary-bg-color: steelblue;
+    --primary-border-color: black;
+  }
+
   /* devanagari */
   
   @font-face {
@@ -80,12 +94,8 @@
   body {
     height: 100%;
     font-family: Hind;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-fg-color);
   }
-  
-  /* css variables */
-  button {
-    --primary-fg-color: white;
-    --primary-bg-color: steelblue;
-    --primary-border-color: black;
-  }
+
 </style>

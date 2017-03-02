@@ -7,7 +7,7 @@
       <input type="url" v-model="url" />
     </div>
     <div class="address-action">
-      <button v-on:click="go">GO</button>
+      <button @click="go">GO</button>
     </div>
   </div>
 </template>
