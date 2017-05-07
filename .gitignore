@@ -1,12 +1,4 @@
-.DS_Store
-app/dist/index.html
-app/dist/main.js
-app/dist/renderer.js
-app/dist/styles.css
-builds/*
-coverage
-node_modules/
+dist
+node_modules
 npm-debug.log
 npm-debug.log.*
-thumbs.db
-!.gitkeep
